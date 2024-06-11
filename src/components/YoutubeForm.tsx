@@ -55,9 +55,10 @@ const YoutubeForm: React.FunctionComponent<IYoutubeFormProps> = () => {
             id="name"
             name="name"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.name}
           ></input>
-          {formik.errors.name && (
+          {formik.errors.name && formik.touched.name && (
             <div className="error">{formik.errors.name}</div>
           )}
         </div>
@@ -69,9 +70,10 @@ const YoutubeForm: React.FunctionComponent<IYoutubeFormProps> = () => {
             id="email"
             name="email"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.email}
           ></input>
-          {formik.errors.email && (
+          {formik.errors.email && formik.touched.email && (
             <div className="error">{formik.errors.email}</div>
           )}
         </div>
@@ -83,9 +85,10 @@ const YoutubeForm: React.FunctionComponent<IYoutubeFormProps> = () => {
             id="channel"
             name="channel"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.channel}
           ></input>
-          {formik.errors.channel && (
+          {formik.errors.channel && formik.touched.channel && (
             <div className="error">{formik.errors.channel}</div>
           )}
         </div>
