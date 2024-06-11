@@ -51,7 +51,7 @@ const YoutubeForm: React.FunctionComponent<IYoutubeFormProps> = () => {
           value={formik.values.channel}
         ></input>
 
-        <button>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
