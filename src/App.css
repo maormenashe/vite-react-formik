@@ -16,8 +16,8 @@ label {
   margin-bottom: 5px;
 }
 
-input[type='text'],
-input[type='email'],
+input[type="text"],
+input[type="email"],
 textarea {
   display: block;
   width: 400px;
@@ -38,4 +38,6 @@ textarea {
 
 .error {
   color: red;
+  will-change: transform;
+  font-weight: bold;
 }
