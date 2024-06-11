@@ -1,12 +1,14 @@
 import "./App.css";
-import YoutubeFormUseFormikYup from "./components/YoutubeFormUseFormikYup";
+import YoutubeFormFormik from "./components/YoutubeFormFormik";
+// import YoutubeFormUseFormikYup from "./components/YoutubeFormUseFormikYup";
 // import YoutubeFormUseFormik from "./components/YoutubeFormUseFormik";
 
 function App() {
   return (
     <div className="App">
       {/* <YoutubeFormUseFormik></YoutubeFormUseFormik> */}
-      <YoutubeFormUseFormikYup />
+      {/* <YoutubeFormUseFormikYup /> */}
+      <YoutubeFormFormik />
     </div>
   );
 }
