@@ -63,10 +63,11 @@ const YoutubeFormUseFormikYup: React.FunctionComponent<
           <input
             type="text"
             id="name"
-            name="name"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.name}
+            // name="name"
+            // onChange={formik.handleChange}
+            // onBlur={formik.handleBlur}
+            // value={formik.values.name}
+            {...formik.getFieldProps("name")}
           ></input>
           {formik.errors.name && formik.touched.name && (
             <div className="error">{formik.errors.name}</div>
@@ -78,10 +79,11 @@ const YoutubeFormUseFormikYup: React.FunctionComponent<
           <input
             type="email"
             id="email"
-            name="email"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
+            // name="email"
+            // onChange={formik.handleChange}
+            // onBlur={formik.handleBlur}
+            // value={formik.values.email}
+            {...formik.getFieldProps("email")}
           ></input>
           {formik.errors.email && formik.touched.email && (
             <div className="error">{formik.errors.email}</div>
@@ -93,10 +95,11 @@ const YoutubeFormUseFormikYup: React.FunctionComponent<
           <input
             type="text"
             id="channel"
-            name="channel"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.channel}
+            // name="channel"
+            // onChange={formik.handleChange}
+            // onBlur={formik.handleBlur}
+            // value={formik.values.channel}
+            {...formik.getFieldProps("channel")}
           ></input>
           {formik.errors.channel && formik.touched.channel && (
             <div className="error">{formik.errors.channel}</div>
