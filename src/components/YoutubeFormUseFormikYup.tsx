@@ -1,4 +1,5 @@
 import { FormikHelpers, useFormik } from "formik";
+import * as Yup from "yup";
 import * as React from "react";
 
 interface IYoutubeFormProps {}
@@ -9,7 +10,7 @@ type YoutubeForm = {
   channel: string;
 };
 
-type YoutubeFormErrors = Partial<YoutubeForm>;
+// type YoutubeFormErrors = Partial<YoutubeForm>;
 
 const initialValues: YoutubeForm = {
   name: "",
@@ -24,30 +25,39 @@ const onSubmit = (
   console.log("Submitted", values, formikHelpers);
 };
 
-const validate = (values: YoutubeForm) => {
-  const errors: YoutubeFormErrors = {};
+// const validate = (values: YoutubeForm) => {
+//   const errors: YoutubeFormErrors = {};
 
-  if (!values.name) errors.name = "Required";
+//   if (!values.name) errors.name = "Required";
 
-  if (!values.email) errors.email = "Required";
-  else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))
-    errors.email = "Invalid email address";
+//   if (!values.email) errors.email = "Required";
+//   else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email))
+//     errors.email = "Invalid email address";
 
-  if (!values.channel) errors.channel = "Required";
+//   if (!values.channel) errors.channel = "Required";
 
-  return errors;
-};
+//   return errors;
+// };
 
-const YoutubeForm: React.FunctionComponent<IYoutubeFormProps> = () => {
+const validationSchema = Yup.object({
+  name: Yup.string().required("Required"),
+  email: Yup.string().email("Invalid email format").required("Required"),
+  channel: Yup.string().required("Required"),
+});
+
+const YoutubeFormUseFormikYup: React.FunctionComponent<
+  IYoutubeFormProps
+> = () => {
   const formik = useFormik<YoutubeForm>({
     initialValues,
     onSubmit,
-    validate,
+    validationSchema,
+    // validate,
   });
 
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
+      <form noValidate onSubmit={formik.handleSubmit}>
         <div className="form-control">
           <label htmlFor="name">Name</label>
           <input
@@ -101,4 +111,4 @@ const YoutubeForm: React.FunctionComponent<IYoutubeFormProps> = () => {
   );
 };
 
-export default YoutubeForm;
+export default YoutubeFormUseFormikYup;
