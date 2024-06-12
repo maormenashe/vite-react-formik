@@ -51,6 +51,7 @@ const onSubmit = (
   formikHelpers: FormikHelpers<YoutubeForm>
 ) => {
   console.log("Submitted", values, formikHelpers);
+  formikHelpers.setSubmitting(false);
 };
 
 const validationSchema = Yup.object({
@@ -76,6 +77,10 @@ const validateComments = (value: string) => {
 
   return error;
 };
+
+// const isFormDirtyAndValid = <T,>(formik: FormikProps<T>) => {
+//   return formik.dirty && formik.isValid;
+// };
 
 const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
   return (
@@ -222,12 +227,26 @@ const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
                   email: true,
                   channel: true,
                   comments: true,
+                  phoneNumbers: true,
+                  phNumbers: true,
                 })
               }
             >
               Visit all
             </button>
-            <button type="submit">Submit</button>
+            {/* <button
+              type="submit"
+              disabled={!isFormDirtyAndValid(formik) || formik.isSubmitting}
+            >
+              Submit
+            </button> */}
+
+            <button
+              type="submit"
+              disabled={!formik.isValid || formik.isSubmitting}
+            >
+              Submit
+            </button>
           </Form>
         );
       }}
