@@ -5,6 +5,9 @@ import {
   Field,
   ErrorMessage,
   FieldProps,
+  FieldArray,
+  FieldArrayRenderProps,
+  FormikProps,
 } from "formik";
 import * as Yup from "yup";
 import * as React from "react";
@@ -25,6 +28,7 @@ type YoutubeForm = {
   address: string;
   social: Social;
   phoneNumbers: string[];
+  phNumbers: string[];
 };
 
 const initialValues: YoutubeForm = {
@@ -38,6 +42,7 @@ const initialValues: YoutubeForm = {
     twitter: "",
   },
   phoneNumbers: ["", ""],
+  phNumbers: [""],
 };
 
 const onSubmit = (
@@ -56,11 +61,16 @@ const validationSchema = Yup.object({
       .matches(/^[0-9]+$/, "Phone number must be digits only")
       .required("Required")
   ),
+  phNumbers: Yup.array().of(
+    Yup.string()
+      .matches(/^[0-9]+$/, "Phone number must be digits only")
+      .required("Required")
+  ),
 });
 
 const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
   return (
-    <Formik
+    <Formik<YoutubeForm>
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
@@ -133,6 +143,39 @@ const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
           <label htmlFor="secondaryPh">Secondary phone number</label>
           <Field type="text" id="secondaryPh" name="phoneNumbers[1]" />
           <ErrorMessage name="phoneNumbers[1]" component={TextError} />
+        </div>
+
+        <div className="form-control">
+          <label>List of phone numbers</label>
+          <FieldArray name="phNumbers">
+            {(fieldArrProps: FieldArrayRenderProps) => {
+              const { push, remove, form } = fieldArrProps;
+              const { values } = form as FormikProps<YoutubeForm>;
+              const { phNumbers } = values;
+
+              return (
+                <div>
+                  {phNumbers.map((_, index) => {
+                    return (
+                      <div key={index}>
+                        <Field type="text" name={`phNumbers[${index}]`} />
+                        <ErrorMessage
+                          name={`phNumbers[${index}]`}
+                          component={TextError}
+                        />
+                        <button type="button" onClick={() => remove(index)}>
+                          -
+                        </button>
+                      </div>
+                    );
+                  })}
+                  <button type="button" onClick={() => push("")}>
+                    +
+                  </button>
+                </div>
+              );
+            }}
+          </FieldArray>
         </div>
 
         <button type="submit">Submit</button>
