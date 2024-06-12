@@ -12,12 +12,18 @@ import TextError from "./TextError";
 
 interface IYoutubeFormProps {}
 
+type Social = {
+  facebook: string;
+  twitter: string;
+};
+
 type YoutubeForm = {
   name: string;
   email: string;
   channel: string;
   comments: string;
   address: string;
+  social: Social;
 };
 
 const initialValues: YoutubeForm = {
@@ -26,6 +32,10 @@ const initialValues: YoutubeForm = {
   channel: "",
   comments: "",
   address: "",
+  social: {
+    facebook: "",
+    twitter: "",
+  },
 };
 
 const onSubmit = (
@@ -81,7 +91,6 @@ const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
           <Field name="address">
             {(props: FieldProps) => {
               const { field, meta } = props;
-              console.log("Render Props", props);
               return (
                 <div>
                   <input type="text" id="address" {...field} />
@@ -93,6 +102,18 @@ const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
             }}
           </Field>
           <ErrorMessage name="address" component={TextError} />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="facebook">Facebook profile</label>
+          <Field type="text" id="facebook" name="social.facebook" />
+          <ErrorMessage name="facebook" component={TextError} />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="twitter">Twitter profile</label>
+          <Field type="text" id="twitter" name="social.twitter" />
+          <ErrorMessage name="twitter" component={TextError} />
         </div>
 
         <button type="submit">Submit</button>
