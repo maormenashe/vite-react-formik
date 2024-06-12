@@ -3,6 +3,9 @@ import { BaseControlProps } from "../types/form/controls";
 import CustomInput, { CustomInputProps } from "./CustomInput";
 import CustomTextarea, { CustomTextareaProps } from "./CustomTextarea";
 import CustomSelect, { CustomSelectProps } from "./CustomSelect";
+import CustomRadioButtons, {
+  CustomRadioButtonsProps,
+} from "./CustomRadioButtons";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type ControlType =
@@ -25,10 +28,9 @@ type SelectProps = CustomSelectProps & {
   asControl: "select";
 };
 
-type RadioProps = BaseControlProps &
-  React.ComponentProps<"input"> & {
-    asControl: "radio";
-  };
+type RadioProps = CustomRadioButtonsProps & {
+  asControl: "radio";
+};
 
 type CheckboxProps = BaseControlProps &
   React.ComponentProps<"input"> & {
@@ -59,6 +61,8 @@ const FormikControl: React.FunctionComponent<FormikControlProps> = (props) => {
       return <CustomTextarea {...(rest as TextAreaProps)} />;
     case "select":
       return <CustomSelect {...(rest as SelectProps)} />;
+    case "radio":
+      return <CustomRadioButtons {...(rest as RadioProps)} />;
     default:
       return <></>;
   }
