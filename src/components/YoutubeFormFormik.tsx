@@ -69,6 +69,14 @@ const validationSchema = Yup.object({
   ),
 });
 
+const validateComments = (value: string) => {
+  let error;
+
+  if (!value) error = "Required";
+
+  return error;
+};
+
 const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
   return (
     <Formik<YoutubeForm>
@@ -103,7 +111,12 @@ const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
 
         <div className="form-control">
           <label htmlFor="comments">Comments</label>
-          <Field as="textarea" id="comments" name="comments" />
+          <Field
+            as="textarea"
+            id="comments"
+            name="comments"
+            validate={validateComments}
+          />
           <ErrorMessage name="comments" component={TextError} />
         </div>
 
