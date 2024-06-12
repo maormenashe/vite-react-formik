@@ -24,6 +24,7 @@ type YoutubeForm = {
   comments: string;
   address: string;
   social: Social;
+  phoneNumbers: string[];
 };
 
 const initialValues: YoutubeForm = {
@@ -36,6 +37,7 @@ const initialValues: YoutubeForm = {
     facebook: "",
     twitter: "",
   },
+  phoneNumbers: ["", ""],
 };
 
 const onSubmit = (
@@ -49,6 +51,11 @@ const validationSchema = Yup.object({
   name: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email format").required("Required"),
   channel: Yup.string().required("Required"),
+  phoneNumbers: Yup.array().of(
+    Yup.string()
+      .matches(/^[0-9]+$/, "Phone number must be digits only")
+      .required("Required")
+  ),
 });
 
 const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
@@ -114,6 +121,18 @@ const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
           <label htmlFor="twitter">Twitter profile</label>
           <Field type="text" id="twitter" name="social.twitter" />
           <ErrorMessage name="twitter" component={TextError} />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="primaryPh">Primary phone number</label>
+          <Field type="text" id="primaryPh" name="phoneNumbers[0]" />
+          <ErrorMessage name="phoneNumbers[0]" component={TextError} />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="secondaryPh">Secondary phone number</label>
+          <Field type="text" id="secondaryPh" name="phoneNumbers[1]" />
+          <ErrorMessage name="phoneNumbers[1]" component={TextError} />
         </div>
 
         <button type="submit">Submit</button>
