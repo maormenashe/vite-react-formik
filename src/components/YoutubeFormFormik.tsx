@@ -87,117 +87,150 @@ const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
       // validateOnBlur={false}
       // validateOnChange={false}
     >
-      <Form noValidate>
-        <div className="form-control">
-          <label htmlFor="name">Name</label>
-          <Field type="text" id="name" name="name" />
-          <ErrorMessage name="name" component="div" className="error" />
-        </div>
+      {(formik: FormikProps<YoutubeForm>) => {
+        return (
+          <Form noValidate>
+            <div className="form-control">
+              <label htmlFor="name">Name</label>
+              <Field type="text" id="name" name="name" />
+              <ErrorMessage name="name" component="div" className="error" />
+            </div>
 
-        <div className="form-control">
-          <label htmlFor="email">Email</label>
-          <Field type="email" id="email" name="email" />
-          <ErrorMessage name="email" component={TextError} />
-        </div>
+            <div className="form-control">
+              <label htmlFor="email">Email</label>
+              <Field type="email" id="email" name="email" />
+              <ErrorMessage name="email" component={TextError} />
+            </div>
 
-        <div className="form-control">
-          <label htmlFor="channel">Channel</label>
-          <Field type="text" id="channel" name="channel" />
-          <ErrorMessage
-            name="channel"
-            render={(errorMsg: string) => <TextError>{errorMsg}</TextError>}
-          />
-        </div>
+            <div className="form-control">
+              <label htmlFor="channel">Channel</label>
+              <Field type="text" id="channel" name="channel" />
+              <ErrorMessage
+                name="channel"
+                render={(errorMsg: string) => <TextError>{errorMsg}</TextError>}
+              />
+            </div>
 
-        <div className="form-control">
-          <label htmlFor="comments">Comments</label>
-          <Field
-            as="textarea"
-            id="comments"
-            name="comments"
-            validate={validateComments}
-          />
-          <ErrorMessage name="comments" component={TextError} />
-        </div>
+            <div className="form-control">
+              <label htmlFor="comments">Comments</label>
+              <Field
+                as="textarea"
+                id="comments"
+                name="comments"
+                validate={validateComments}
+              />
+              <ErrorMessage name="comments" component={TextError} />
+            </div>
 
-        <div className="form-control">
-          <label htmlFor="address">Address</label>
-          <FastField name="address">
-            {(props: FieldProps) => {
-              console.log("Address FastField Render");
-              const { field, meta } = props;
-              return (
-                <div>
-                  <input type="text" id="address" {...field} />
-                  {meta.touched && meta.error && (
-                    <TextError>{meta.error}</TextError>
-                  )}
-                </div>
-              );
-            }}
-          </FastField>
-          <ErrorMessage name="address" component={TextError} />
-        </div>
+            <div className="form-control">
+              <label htmlFor="address">Address</label>
+              <FastField name="address">
+                {(props: FieldProps) => {
+                  console.log("Address FastField Render");
+                  const { field, meta } = props;
+                  return (
+                    <div>
+                      <input type="text" id="address" {...field} />
+                      {meta.touched && meta.error && (
+                        <TextError>{meta.error}</TextError>
+                      )}
+                    </div>
+                  );
+                }}
+              </FastField>
+              <ErrorMessage name="address" component={TextError} />
+            </div>
 
-        <div className="form-control">
-          <label htmlFor="facebook">Facebook profile</label>
-          <Field type="text" id="facebook" name="social.facebook" />
-          <ErrorMessage name="facebook" component={TextError} />
-        </div>
+            <div className="form-control">
+              <label htmlFor="facebook">Facebook profile</label>
+              <Field type="text" id="facebook" name="social.facebook" />
+              <ErrorMessage name="facebook" component={TextError} />
+            </div>
 
-        <div className="form-control">
-          <label htmlFor="twitter">Twitter profile</label>
-          <Field type="text" id="twitter" name="social.twitter" />
-          <ErrorMessage name="twitter" component={TextError} />
-        </div>
+            <div className="form-control">
+              <label htmlFor="twitter">Twitter profile</label>
+              <Field type="text" id="twitter" name="social.twitter" />
+              <ErrorMessage name="twitter" component={TextError} />
+            </div>
 
-        <div className="form-control">
-          <label htmlFor="primaryPh">Primary phone number</label>
-          <Field type="text" id="primaryPh" name="phoneNumbers[0]" />
-          <ErrorMessage name="phoneNumbers[0]" component={TextError} />
-        </div>
+            <div className="form-control">
+              <label htmlFor="primaryPh">Primary phone number</label>
+              <Field type="text" id="primaryPh" name="phoneNumbers[0]" />
+              <ErrorMessage name="phoneNumbers[0]" component={TextError} />
+            </div>
 
-        <div className="form-control">
-          <label htmlFor="secondaryPh">Secondary phone number</label>
-          <Field type="text" id="secondaryPh" name="phoneNumbers[1]" />
-          <ErrorMessage name="phoneNumbers[1]" component={TextError} />
-        </div>
+            <div className="form-control">
+              <label htmlFor="secondaryPh">Secondary phone number</label>
+              <Field type="text" id="secondaryPh" name="phoneNumbers[1]" />
+              <ErrorMessage name="phoneNumbers[1]" component={TextError} />
+            </div>
 
-        <div className="form-control">
-          <label>List of phone numbers</label>
-          <FieldArray name="phNumbers">
-            {(fieldArrProps: FieldArrayRenderProps) => {
-              const { push, remove, form } = fieldArrProps;
-              const { values } = form as FormikProps<YoutubeForm>;
-              const { phNumbers } = values;
+            <div className="form-control">
+              <label>List of phone numbers</label>
+              <FieldArray name="phNumbers">
+                {(fieldArrProps: FieldArrayRenderProps) => {
+                  const { push, remove, form } = fieldArrProps;
+                  const { values } = form as FormikProps<YoutubeForm>;
+                  const { phNumbers } = values;
 
-              return (
-                <div>
-                  {phNumbers.map((_, index) => {
-                    return (
-                      <div key={index}>
-                        <Field type="text" name={`phNumbers[${index}]`} />
-                        <ErrorMessage
-                          name={`phNumbers[${index}]`}
-                          component={TextError}
-                        />
-                        <button type="button" onClick={() => remove(index)}>
-                          -
-                        </button>
-                      </div>
-                    );
-                  })}
-                  <button type="button" onClick={() => push("")}>
-                    +
-                  </button>
-                </div>
-              );
-            }}
-          </FieldArray>
-        </div>
+                  return (
+                    <div>
+                      {phNumbers.map((_, index) => {
+                        return (
+                          <div key={index}>
+                            <Field type="text" name={`phNumbers[${index}]`} />
+                            <ErrorMessage
+                              name={`phNumbers[${index}]`}
+                              component={TextError}
+                            />
+                            <button type="button" onClick={() => remove(index)}>
+                              -
+                            </button>
+                          </div>
+                        );
+                      })}
+                      <button type="button" onClick={() => push("")}>
+                        +
+                      </button>
+                    </div>
+                  );
+                }}
+              </FieldArray>
+            </div>
 
-        <button type="submit">Submit</button>
-      </Form>
+            <button
+              type="button"
+              onClick={() => formik.validateField("comments")}
+            >
+              Validate comments
+            </button>
+            <button type="button" onClick={() => formik.validateForm()}>
+              Validate all
+            </button>
+
+            <button
+              type="button"
+              onClick={() => formik.setFieldTouched("comments")}
+            >
+              Visit comments
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                formik.setTouched({
+                  name: true,
+                  email: true,
+                  channel: true,
+                  comments: true,
+                })
+              }
+            >
+              Visit all
+            </button>
+            <button type="submit">Submit</button>
+          </Form>
+        );
+      }}
     </Formik>
   );
 };
