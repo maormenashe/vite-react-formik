@@ -67,6 +67,7 @@ const onSubmit = (
 ) => {
   console.log("Submitted", values, formikHelpers);
   formikHelpers.setSubmitting(false);
+  formikHelpers.resetForm();
 };
 
 const validationSchema = Yup.object({
@@ -255,6 +256,8 @@ const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
             <button type="button" onClick={() => setFormValues(mockServerData)}>
               Load saved data
             </button>
+
+            <button type="reset">Reset</button>
 
             {/* <button
               type="submit"
