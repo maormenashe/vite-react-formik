@@ -8,9 +8,11 @@ interface IFormikContainerProps {}
 const FormikContainer: React.FunctionComponent<IFormikContainerProps> = () => {
   const initialValues = {
     email: "",
+    description: "",
   };
   const validationSchema = Yup.object({
     email: Yup.string().required("Required"),
+    description: Yup.string().required("Required"),
   });
   const onSubmit = (values: unknown) => console.log("Form data", values);
   return (
@@ -28,6 +30,12 @@ const FormikContainer: React.FunctionComponent<IFormikContainerProps> = () => {
               type="email"
               label="Email"
               name="email"
+            />
+
+            <FormikControl
+              asControl="textarea"
+              label="Description"
+              name="description"
             />
             <button type="submit">Submit</button>
           </Form>
