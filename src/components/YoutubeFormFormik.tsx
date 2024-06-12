@@ -13,6 +13,7 @@ import {
 import * as Yup from "yup";
 import * as React from "react";
 import TextError from "./TextError";
+import { useState } from "react";
 
 interface IYoutubeFormProps {}
 
@@ -33,7 +34,7 @@ type YoutubeForm = {
 };
 
 const initialValues: YoutubeForm = {
-  name: "",
+  name: "Maor",
   email: "",
   channel: "",
   comments: "",
@@ -44,6 +45,20 @@ const initialValues: YoutubeForm = {
   },
   phoneNumbers: ["", ""],
   phNumbers: [""],
+};
+
+const mockServerData: YoutubeForm = {
+  name: "Maor",
+  email: "m@example.com",
+  channel: "Maor",
+  comments: "Welcome Maor",
+  address: "Or Yehuda",
+  social: {
+    facebook: "",
+    twitter: "",
+  },
+  phoneNumbers: ["1231231", "123123"],
+  phNumbers: ["1231231"],
 };
 
 const onSubmit = (
@@ -83,11 +98,13 @@ const validateComments = (value: string) => {
 // };
 
 const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
+  const [formValues, setFormValues] = useState<YoutubeForm | null>(null);
   return (
     <Formik<YoutubeForm>
-      initialValues={initialValues}
+      initialValues={formValues || initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      enableReinitialize
       // validateOnMount={true}
       // validateOnBlur={false}
       // validateOnChange={false}
@@ -234,6 +251,11 @@ const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
             >
               Visit all
             </button>
+
+            <button type="button" onClick={() => setFormValues(mockServerData)}>
+              Load saved data
+            </button>
+
             {/* <button
               type="submit"
               disabled={!isFormDirtyAndValid(formik) || formik.isSubmitting}
