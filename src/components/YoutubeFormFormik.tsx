@@ -8,6 +8,7 @@ import {
   FieldArray,
   FieldArrayRenderProps,
   FormikProps,
+  FastField,
 } from "formik";
 import * as Yup from "yup";
 import * as React from "react";
@@ -74,6 +75,9 @@ const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      // validateOnMount={true}
+      // validateOnBlur={false}
+      // validateOnChange={false}
     >
       <Form noValidate>
         <div className="form-control">
@@ -105,8 +109,9 @@ const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
 
         <div className="form-control">
           <label htmlFor="address">Address</label>
-          <Field name="address">
+          <FastField name="address">
             {(props: FieldProps) => {
+              console.log("Address FastField Render");
               const { field, meta } = props;
               return (
                 <div>
@@ -117,7 +122,7 @@ const YoutubeFormFormik: React.FunctionComponent<IYoutubeFormProps> = () => {
                 </div>
               );
             }}
-          </Field>
+          </FastField>
           <ErrorMessage name="address" component={TextError} />
         </div>
 
