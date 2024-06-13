@@ -43,7 +43,7 @@ const FormikContainer: React.FunctionComponent<IFormikContainerProps> = () => {
     selectMultipleOption: Yup.array().min(1, "Required"),
     radioOption: Yup.string().required("Required"),
     checkboxOption: Yup.array().required("Required"),
-    birthDate: Yup.date().required("Required").nullable(),
+    birthDate: Yup.date().required("Required"),
   });
 
   const onSubmit = (values: unknown) => console.log("Form data", values);
