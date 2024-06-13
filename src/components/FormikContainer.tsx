@@ -19,6 +19,12 @@ const radioOptions: SelectOption[] = [
   { label: "Option 3", value: "rOption3" },
 ];
 
+const checkboxOptions: SelectOption[] = [
+  { label: "Option 1", value: "cOption1" },
+  { label: "Option 2", value: "cOption2" },
+  { label: "Option 3", value: "cOption3" },
+];
+
 const FormikContainer: React.FunctionComponent<IFormikContainerProps> = () => {
   const initialValues = {
     email: "",
@@ -26,14 +32,18 @@ const FormikContainer: React.FunctionComponent<IFormikContainerProps> = () => {
     selectOption: "",
     selectMultipleOption: [],
     radioOption: "",
+    checkboxOption: [],
   };
+
   const validationSchema = Yup.object({
     email: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
     selectOption: Yup.string().required("Required"),
     selectMultipleOption: Yup.array().min(1, "Required"),
     radioOption: Yup.string().required("Required"),
+    checkboxOption: Yup.array().required("Required"),
   });
+
   const onSubmit = (values: unknown) => console.log("Form data", values);
   return (
     <Formik
@@ -78,6 +88,13 @@ const FormikContainer: React.FunctionComponent<IFormikContainerProps> = () => {
               label="Radio topic"
               name="radioOption"
               options={radioOptions}
+            />
+
+            <FormikControl
+              asControl="checkbox"
+              label="Checkbox topic"
+              name="checkboxOption"
+              options={checkboxOptions}
             />
 
             <button type="submit">Submit</button>

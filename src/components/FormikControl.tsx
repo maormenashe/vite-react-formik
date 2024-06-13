@@ -6,6 +6,9 @@ import CustomSelect, { CustomSelectProps } from "./CustomSelect";
 import CustomRadioButtons, {
   CustomRadioButtonsProps,
 } from "./CustomRadioButtons";
+import CustomCheckboxGroup, {
+  CustomCheckboxGroupProps,
+} from "./CustomCheckboxGroup";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type ControlType =
@@ -32,10 +35,9 @@ type RadioProps = CustomRadioButtonsProps & {
   asControl: "radio";
 };
 
-type CheckboxProps = BaseControlProps &
-  React.ComponentProps<"input"> & {
-    asControl: "checkbox";
-  };
+type CheckboxGroupProps = CustomCheckboxGroupProps & {
+  asControl: "checkbox";
+};
 
 type DateProps = BaseControlProps &
   React.ComponentProps<"input"> & {
@@ -48,7 +50,7 @@ type FormikControlProps =
   | TextAreaProps
   | SelectProps
   | RadioProps
-  | CheckboxProps
+  | CheckboxGroupProps
   | DateProps;
 
 const FormikControl: React.FunctionComponent<FormikControlProps> = (props) => {
@@ -63,6 +65,8 @@ const FormikControl: React.FunctionComponent<FormikControlProps> = (props) => {
       return <CustomSelect {...(rest as SelectProps)} />;
     case "radio":
       return <CustomRadioButtons {...(rest as RadioProps)} />;
+    case "checkbox":
+      return <CustomCheckboxGroup {...(rest as CheckboxGroupProps)} />;
     default:
       return <></>;
   }
