@@ -33,7 +33,7 @@ const FormikContainer: React.FunctionComponent<IFormikContainerProps> = () => {
     selectMultipleOption: [],
     radioOption: "",
     checkboxOption: [],
-    birthDate: "",
+    birthDate: null,
   };
 
   const validationSchema = Yup.object({
