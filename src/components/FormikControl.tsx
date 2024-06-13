@@ -1,5 +1,4 @@
 import * as React from "react";
-import { BaseControlProps } from "../types/form/controls";
 import CustomInput, { CustomInputProps } from "./CustomInput";
 import CustomTextarea, { CustomTextareaProps } from "./CustomTextarea";
 import CustomSelect, { CustomSelectProps } from "./CustomSelect";
@@ -9,6 +8,7 @@ import CustomRadioButtons, {
 import CustomCheckboxGroup, {
   CustomCheckboxGroupProps,
 } from "./CustomCheckboxGroup";
+import CustomDatePicker, { CustomDatePickerProps } from "./CustomDatePicker";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type ControlType =
@@ -39,10 +39,9 @@ type CheckboxGroupProps = CustomCheckboxGroupProps & {
   asControl: "checkbox";
 };
 
-type DateProps = BaseControlProps &
-  React.ComponentProps<"input"> & {
-    asControl: "date";
-  };
+type DateProps = CustomDatePickerProps & {
+  asControl: "date";
+};
 
 // Create a discriminated union of all control props
 type FormikControlProps =
@@ -67,6 +66,8 @@ const FormikControl: React.FunctionComponent<FormikControlProps> = (props) => {
       return <CustomRadioButtons {...(rest as RadioProps)} />;
     case "checkbox":
       return <CustomCheckboxGroup {...(rest as CheckboxGroupProps)} />;
+    case "date":
+      return <CustomDatePicker {...(rest as DateProps)} />;
     default:
       return <></>;
   }

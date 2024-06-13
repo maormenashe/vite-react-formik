@@ -33,6 +33,7 @@ const FormikContainer: React.FunctionComponent<IFormikContainerProps> = () => {
     selectMultipleOption: [],
     radioOption: "",
     checkboxOption: [],
+    birthDate: "",
   };
 
   const validationSchema = Yup.object({
@@ -42,6 +43,7 @@ const FormikContainer: React.FunctionComponent<IFormikContainerProps> = () => {
     selectMultipleOption: Yup.array().min(1, "Required"),
     radioOption: Yup.string().required("Required"),
     checkboxOption: Yup.array().required("Required"),
+    birthDate: Yup.date().required("Required").nullable(),
   });
 
   const onSubmit = (values: unknown) => console.log("Form data", values);
@@ -95,6 +97,12 @@ const FormikContainer: React.FunctionComponent<IFormikContainerProps> = () => {
               label="Checkbox topic"
               name="checkboxOption"
               options={checkboxOptions}
+            />
+
+            <FormikControl
+              asControl="date"
+              label="Pick a date"
+              name="birthDate"
             />
 
             <button type="submit">Submit</button>
