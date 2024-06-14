@@ -14,7 +14,6 @@ export default function useFormikContextFocusAndScrollError(
     if (keys.length < 1) return;
 
     const selector = `[name="${keys[0]}"]`;
-    console.log(selector);
 
     const errorElement = document.querySelector(selector) as HTMLElement;
     if (shouldScrollToElement) scrollToElement(errorElement, -30);

@@ -1,5 +1,6 @@
 import "./App.css";
-import RegistrationForm from "./components/RegistrationForm";
+import EnrollmentForm from "./components/EnrollmentForm";
+// import RegistrationForm from "./components/RegistrationForm";
 // import LoginForm from "./components/LoginForm";
 // import FormikContainer from "./components/FormikContainer";
 // import YoutubeFormFormik from "./components/YoutubeFormFormik";
@@ -14,7 +15,8 @@ function App() {
       {/* <YoutubeFormFormik /> */}
       {/* <FormikContainer /> */}
       {/* <LoginForm /> */}
-      <RegistrationForm />
+      {/* <RegistrationForm /> */}
+      <EnrollmentForm />
     </div>
   );
 }
