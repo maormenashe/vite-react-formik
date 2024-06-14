@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import FormikControl from "./FormikControl";
 import { SelectOption } from "../types/form/controls";
 import useElementRefs from "../hooks/useElementRefs";
-import useFormikContextFocusError from "../hooks/useFormikContextFocusError";
+import useFormikContextFocusAndScrollError from "../hooks/useFormikContextFocusAndScrollError";
 
 interface IRegistrationFormProps {}
 
@@ -79,7 +79,7 @@ const RegistrationFormContent: React.FunctionComponent<
   IRegistrationFormContentForm
 > = ({ formik }) => {
   const elementRefs = useElementRefs<RegistrationForm>();
-  useFormikContextFocusError();
+  useFormikContextFocusAndScrollError();
   return (
     <Form noValidate>
       <FormikControl
