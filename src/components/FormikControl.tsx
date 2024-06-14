@@ -9,6 +9,7 @@ import CustomCheckboxGroup, {
   CustomCheckboxGroupProps,
 } from "./CustomCheckboxGroup";
 import CustomDatePicker, { CustomDatePickerProps } from "./CustomDatePicker";
+import ChakraInput, { CustomChakraInputProps } from "./ChakraInput";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 type ControlType =
@@ -17,7 +18,8 @@ type ControlType =
   | "select"
   | "radio"
   | "checkbox"
-  | "date";
+  | "date"
+  | "chakrainput";
 
 type InputProps = CustomInputProps & {
   asControl: "input";
@@ -43,6 +45,10 @@ type DateProps = CustomDatePickerProps & {
   asControl: "date";
 };
 
+type ChakraInputProps = CustomChakraInputProps & {
+  asControl: "chakrainput";
+};
+
 // Create a discriminated union of all control props
 type FormikControlProps =
   | InputProps
@@ -50,7 +56,8 @@ type FormikControlProps =
   | SelectProps
   | RadioProps
   | CheckboxGroupProps
-  | DateProps;
+  | DateProps
+  | ChakraInputProps;
 
 const FormikControl: React.FunctionComponent<FormikControlProps> = (props) => {
   const { asControl, ...rest } = props;
@@ -68,6 +75,8 @@ const FormikControl: React.FunctionComponent<FormikControlProps> = (props) => {
       return <CustomCheckboxGroup {...(rest as CheckboxGroupProps)} />;
     case "date":
       return <CustomDatePicker {...(rest as DateProps)} />;
+    case "chakrainput":
+      return <ChakraInput {...(rest as ChakraInputProps)} />;
     default:
       return <></>;
   }

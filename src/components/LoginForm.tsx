@@ -37,17 +37,18 @@ const LoginForm: React.FunctionComponent<ILoginFormProps> = () => {
       onSubmit={onSubmit}
     >
       {(formik: FormikProps<LoginForm>) => {
+        console.log(formik);
         return (
           <Form noValidate>
             <FormikControl
-              asControl="input"
+              asControl="chakrainput"
               type="email"
               label="email"
               name="email"
             />
 
             <FormikControl
-              asControl="input"
+              asControl="chakrainput"
               type="password"
               label="password"
               name="password"
