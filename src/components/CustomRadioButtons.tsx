@@ -15,7 +15,6 @@ const CustomRadioButtons: React.FunctionComponent<CustomRadioButtonsProps> = (
   props
 ) => {
   const { label, name, options, ...rest } = props;
-  console.log(options);
   return (
     <div className="form-control">
       <label>{label}</label>
