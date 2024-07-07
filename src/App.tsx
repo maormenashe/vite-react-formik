@@ -1,6 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
-import ModalRouter from "./modal-with-portal-example/ModalRouter";
+import LoginFormWithProvider from "./components/LoginFormWithProvider";
+// import ModalRouter from "./modal-with-portal-example/ModalRouter";
 // import EnrollmentForm from "./components/EnrollmentForm";
 // import RegistrationForm from "./components/RegistrationForm";
 // import LoginForm from "./components/LoginForm";
@@ -12,7 +13,7 @@ import ModalRouter from "./modal-with-portal-example/ModalRouter";
 function App() {
   return (
     <ChakraProvider>
-      <ModalRouter />
+      {/* <ModalRouter /> */}
       <div className="App">
         {/* <YoutubeFormUseFormik></YoutubeFormUseFormik> */}
         {/* <YoutubeFormUseFormikYup /> */}
@@ -21,6 +22,7 @@ function App() {
         {/* <LoginForm /> */}
         {/* <RegistrationForm /> */}
         {/* <EnrollmentForm /> */}
+        <LoginFormWithProvider />
       </div>
     </ChakraProvider>
   );
